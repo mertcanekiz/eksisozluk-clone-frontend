@@ -8,6 +8,7 @@ class Thread extends Component {
     title: "",
     posts: []
   };
+
   componentDidMount() {
     axios
       .get(`http://localhost:8000/threads/${this.props.match.params.id}`)
@@ -18,21 +19,8 @@ class Thread extends Component {
           posts: res.data.posts
         });
       });
-    console.log("didmount");
   }
-  componentDidUpdate(prevProps) {
-    if (this.props.match.params.id !== prevProps.match.params.id) {
-      axios
-        .get(`http://localhost:8000/threads/${this.props.match.params.id}`)
-        .then(res => {
-          this.setState({
-            id: res.data.id,
-            title: res.data.title,
-            posts: res.data.posts
-          });
-        });
-    }
-  }
+
   render() {
     return (
       <div>
@@ -42,7 +30,7 @@ class Thread extends Component {
         <ol>
           {this.state.posts.map(post => {
             return (
-              <li>
+              <li key={post.id}>
                 {post.content}
                 <Link to={`/posts/${post.id}`}>{post.created_at}</Link>
               </li>

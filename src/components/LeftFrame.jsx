@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink, Link, withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import axios from "axios";
 
 class LeftFrame extends Component {
@@ -24,7 +24,7 @@ class LeftFrame extends Component {
           return (
             <NavLink
               className={`list-group-item ${
-                this.props.match.params.id == thread.id ? "active" : ""
+                this.props.match.params.id === thread.id ? "active" : ""
               }`}
               key={`leftframe-thread-${thread.id}`}
               to={`/thread/${thread.id}`}
